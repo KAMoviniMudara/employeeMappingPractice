@@ -3,6 +3,7 @@ package com.example.employeeMappingPractice.dto;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -25,5 +26,16 @@ public class Employee {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "department_id",referencedColumnName = "id")
     private Department department;
+
+    //OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "employee_id",referencedColumnName = "id")
+    private List<Task> task;
+
+    //ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<Project> project;
+
+
 
 }
