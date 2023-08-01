@@ -16,7 +16,7 @@ public class Employee {
     private String address;
 
     //Unidirectional
-
+/*
     //OneToOne
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "profile_id" , referencedColumnName = "id")
@@ -28,12 +28,34 @@ public class Employee {
     private Department department;
 
     //OneToMany
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL,orphanRemovel = true)
     @JoinColumn(name = "employee_id",referencedColumnName = "id")
     private List<Task> task;
 
     //ManyToMany
     @ManyToMany(cascade = CascadeType.ALL)
+    private List<Project> project;
+
+*/
+
+    //Bidirectional
+
+    //OneToOne
+    @OneToOne(cascade = CascadeType.ALL,orphanRemoval = true)
+    @JoinColumn(name = "profile_id",referencedColumnName = "id")
+    private Profile profile;
+
+    //ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "department_id",referencedColumnName = "id")
+    private Department department;
+
+    //OneToMany
+    @OneToMany(cascade = CascadeType.ALL , mappedBy = "employee" )
+    private List<Task> task;
+
+    //ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL )
     private List<Project> project;
 
 

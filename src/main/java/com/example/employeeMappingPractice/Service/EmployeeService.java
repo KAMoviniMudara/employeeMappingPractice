@@ -1,5 +1,6 @@
 package com.example.employeeMappingPractice.Service;
 
+import com.example.employeeMappingPractice.dto.Task;
 import com.example.employeeMappingPractice.repo.EmployeeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,14 @@ public class EmployeeService {
     @Autowired
     EmployeeRepo employeeRepo;
 
-    public Employee insertEmployee(Employee emp){
+    public Employee insertEmployee(Employee emp)
+    {
+        for(Task task : emp.getTask())
+        {
+            task.setEmployee(emp);
+        }
+        emp.setTask(emp.getTask());
+
         return employeeRepo.save(emp);
     }
     public List<Employee> getAllEmployee(){
